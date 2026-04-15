@@ -7,6 +7,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import React from 'react'
 import WorkExperienceSection from '@/components/editor/WorkExperienceSection'
 import { useResumeStore } from '@/store/resumeStore'
 import { createEmptyResumeContent, getSectionByType } from '@/types'
@@ -14,21 +15,17 @@ import type { WorkExperience } from '@/types'
 import { createResumeWithWorkExperience } from '@/test/helpers'
 
 // Mock Tiptap - 与 RichTextEditor.test.tsx 保持一致
-vi.mock('@tiptap/react', () => {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const React = require('react')
-  return {
-    useEditor: () => ({
-      getHTML: () => '<p></p>',
-      commands: { setContent: vi.fn() },
-      chain: () => ({ focus: () => ({ toggleBold: () => ({ run: vi.fn() }), toggleBulletList: () => ({ run: vi.fn() }), toggleOrderedList: () => ({ run: vi.fn() }) }) }),
-      isActive: () => false,
-      on: vi.fn(),
-      off: vi.fn(),
-    }),
-    EditorContent: () => React.createElement('div', { 'data-testid': 'tiptap-editor' }),
-  }
-})
+vi.mock('@tiptap/react', () => ({
+  useEditor: () => ({
+    getHTML: () => '<p></p>',
+    commands: { setContent: vi.fn() },
+    chain: () => ({ focus: () => ({ toggleBold: () => ({ run: vi.fn() }), toggleBulletList: () => ({ run: vi.fn() }), toggleOrderedList: () => ({ run: vi.fn() }) }) }),
+    isActive: () => false,
+    on: vi.fn(),
+    off: vi.fn(),
+  }),
+  EditorContent: () => React.createElement('div', { 'data-testid': 'tiptap-editor' }),
+}))
 vi.mock('@tiptap/starter-kit', () => ({ default: { configure: () => ({}) }, __esModule: true }))
 
 describe('WorkExperienceSection', () => {

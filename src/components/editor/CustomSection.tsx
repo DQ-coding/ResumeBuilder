@@ -173,8 +173,6 @@ function CustomSection({ sectionId, title, items, visible = true }: CustomSectio
                       <RichTextEditor
                         value={desc}
                         onChange={(html) => handleChangeDescription(index, descIndex, html)}
-                        placeholder={t('common.descPlaceholder')}
-                        rows={2}
                       />
                       {item.description.length > 1 && (
                         <button

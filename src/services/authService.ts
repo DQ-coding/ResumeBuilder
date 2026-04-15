@@ -17,7 +17,7 @@ function toAuthResponse(user: User, session: Session): AuthResponse {
     refreshToken: session.refresh_token,
     user: {
       id: user.id,
-      email: user.email,
+      email: user.email ?? '',
     },
   }
 }

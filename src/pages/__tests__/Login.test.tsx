@@ -11,6 +11,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import Login from '@/pages/Login'
 import { useAuthStore } from '@/store/authStore'
 import { supabase } from '@/services/supabase'
+import { AuthError } from '@supabase/supabase-js'
 
 /** 渲染 Login 页面，带路由环境 */
 function renderLogin() {
@@ -71,7 +72,7 @@ describe('Login 页面', () => {
     // Mock Supabase auth 失败
     vi.spyOn(supabase.auth, 'signInWithPassword').mockResolvedValueOnce({
       data: { user: null, session: null },
-      error: new Error('邮箱或密码错误'),
+      error: new AuthError('邮箱或密码错误'),
     })
 
     renderLogin()

@@ -11,31 +11,26 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import React from 'react'
 import SummarySection from '@/components/editor/SummarySection'
 import { useResumeStore } from '@/store/resumeStore'
 import { createEmptyResumeContent, getSectionByType } from '@/types'
 import { createResumeWithSummary } from '@/test/helpers'
 
 // Mock RichTextEditor：用简单的 textarea 替代 Tiptap
-vi.mock('@/components/editor/RichTextEditor', () => {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const React = require('react')
-  return {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    default: ({ value, onChange, placeholder }: any) => {
-      return React.createElement('div', { 'data-testid': 'rich-text-editor' },
-        React.createElement('button', { title: '加粗', type: 'button' }, 'B'),
-        React.createElement('textarea', {
-          value: value?.replace(/<[^>]*>/g, '') || '',
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          onChange: (e: any) => onChange(`<p>${e.target.value}</p>`),
-          placeholder,
-          'aria-label': placeholder,
-        })
-      )
-    },
-  }
-})
+vi.mock('@/components/editor/RichTextEditor', () => ({
+  default: ({ value, onChange, placeholder }: { value: string; onChange: (html: string) => void; placeholder?: string }) => {
+    return React.createElement('div', { 'data-testid': 'rich-text-editor' },
+      React.createElement('button', { title: '加粗', type: 'button' }, 'B'),
+      React.createElement('textarea', {
+        value: value?.replace(/<[^>]*>/g, '') || '',
+        onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => onChange(`<p>${e.target.value}</p>`),
+        placeholder,
+        'aria-label': placeholder,
+      })
+    )
+  },
+}))
 
 describe('SummarySection', () => {
   beforeEach(() => {
@@ -62,7 +57,7 @@ describe('SummarySection', () => {
   it('输入内容后更新 store', async () => {
     const user = userEvent.setup()
     render(<SummarySection />)
-    const textarea = screen.getByPlaceholderText('请输入个人简介')
+    const textarea = screen.getByRole('textbox')
     await user.type(textarea, '5年前端开发经验')
     const { currentResume } = useResumeStore.getState()
     const summary = getSectionByType(currentResume!.content, 'summary')!.content as string

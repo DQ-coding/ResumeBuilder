@@ -14,11 +14,13 @@ import { useResumeStore } from '@/store/resumeStore'
 
 const { mockResumeData, mockUpdateResume, mockToastError } = vi.hoisted(() => {
   const emptyContent = {
-    basic: { name: '', title: '', phone: '', email: '', avatar: '' },
-    summary: '',
-    workExperience: [],
-    education: [],
-    skills: [],
+    sections: [
+      { id: 'section-basic-1', type: 'basic' as const, title: '基本信息', content: { name: '', title: '', phone: '', email: '', avatar: '' } },
+      { id: 'section-summary-1', type: 'summary' as const, title: '个人简介', content: '' },
+      { id: 'section-work-1', type: 'workExperience' as const, title: '工作经历', content: [] },
+      { id: 'section-edu-1', type: 'education' as const, title: '教育背景', content: [] },
+      { id: 'section-skills-1', type: 'skills' as const, title: '技能特长', content: [] },
+    ],
   }
   return {
     mockResumeData: {

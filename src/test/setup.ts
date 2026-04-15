@@ -11,6 +11,13 @@
 import '@testing-library/jest-dom/vitest'
 import '@/i18n'
 
+// jsdom 没有 ResizeObserver，需要 mock
+globalThis.ResizeObserver = class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+
 // 每个测试前清理 localStorage
 beforeEach(() => {
   localStorage.clear()

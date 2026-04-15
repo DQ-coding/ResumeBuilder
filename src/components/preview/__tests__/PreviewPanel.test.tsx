@@ -4,18 +4,9 @@
  * @spec frontend-preview
  */
 
-import { describe, it, expect, beforeAll } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import PreviewPanel from '@/components/preview/PreviewPanel'
-
-// jsdom 没有 ResizeObserver，需要 mock
-beforeAll(() => {
-  global.ResizeObserver = class ResizeObserver {
-    observe() {}
-    unobserve() {}
-    disconnect() {}
-  }
-})
 
 describe('PreviewPanel', () => {
   it('渲染子内容', () => {

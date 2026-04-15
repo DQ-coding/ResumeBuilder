@@ -9,53 +9,49 @@
 
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
+import React from 'react'
 
 // Mock @tiptap/react
 const mockSetContent = vi.fn()
 const mockGetHTML = vi.fn(() => '<p>initial</p>')
 let currentOnChange: ((html: string) => void) | null = null
 
-vi.mock('@tiptap/react', () => {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const React = require('react')
-  return {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    useEditor: (options: any) => {
-      currentOnChange = options.onUpdate ? (html: string) => options.onUpdate({ editor: { getHTML: () => html } }) : null
-      return {
-        getHTML: mockGetHTML,
-        commands: {
-          setContent: mockSetContent,
-          focus: () => ({ toggleBold: () => ({ run: vi.fn() }), toggleBulletList: () => ({ run: vi.fn() }), toggleOrderedList: () => ({ run: vi.fn() }) }),
-        },
-        chain: () => ({
-          focus: () => ({
-            toggleBold: () => ({ run: vi.fn() }),
-            toggleBulletList: () => ({ run: vi.fn() }),
-            toggleOrderedList: () => ({ run: vi.fn() }),
-          }),
+vi.mock('@tiptap/react', () => ({
+  useEditor: (options: { onUpdate?: (props: { editor: { getHTML: () => string } }) => void }) => {
+    const onUpdate = options.onUpdate
+    currentOnChange = onUpdate ? (html: string) => onUpdate({ editor: { getHTML: () => html } }) : null
+    return {
+      getHTML: mockGetHTML,
+      commands: {
+        setContent: mockSetContent,
+        focus: () => ({ toggleBold: () => ({ run: vi.fn() }), toggleBulletList: () => ({ run: vi.fn() }), toggleOrderedList: () => ({ run: vi.fn() }) }),
+      },
+      chain: () => ({
+        focus: () => ({
+          toggleBold: () => ({ run: vi.fn() }),
+          toggleBulletList: () => ({ run: vi.fn() }),
+          toggleOrderedList: () => ({ run: vi.fn() }),
         }),
-        isActive: () => false,
-        on: () => {},
-        off: () => {},
-      }
-    },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
-    EditorContent: ({ editor }: any) => {
-      return React.createElement('div', {
-        'data-testid': 'tiptap-editor',
-        className: 'tiptap',
-        contentEditable: 'true',
-        onInput: (e: React.FormEvent<HTMLDivElement>) => {
-          // 模拟用户输入：触发 onUpdate
-          if (currentOnChange) {
-            currentOnChange(`<p>${e.currentTarget.textContent}</p>`)
-          }
-        },
-      })
-    },
-  }
-})
+      }),
+      isActive: () => false,
+      on: () => {},
+      off: () => {},
+    }
+  },
+  EditorContent: () => {
+    return React.createElement('div', {
+      'data-testid': 'tiptap-editor',
+      className: 'tiptap',
+      contentEditable: 'true',
+      onInput: (e: React.FormEvent<HTMLDivElement>) => {
+        // 模拟用户输入：触发 onUpdate
+        if (currentOnChange) {
+          currentOnChange(`<p>${e.currentTarget.textContent}</p>`)
+        }
+      },
+    })
+  },
+}))
 
 vi.mock('@tiptap/starter-kit', () => ({
   default: { configure: () => ({}) },

@@ -35,7 +35,6 @@ function SummarySection() {
         <RichTextEditor
           value={summary}
           onChange={(html) => updateSection(summarySection.id, html)}
-          placeholder={t('editor.summary.placeholder')}
         />
       </div>
     </SectionCollapsible>

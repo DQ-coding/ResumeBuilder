@@ -4,22 +4,13 @@
  * @spec frontend-editor @spec frontend-preview @spec phase2-iteration
  */
 
-import { describe, it, expect, beforeEach, beforeAll, vi } from 'vitest'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import Editor from '@/pages/Editor'
 import { useResumeStore } from '@/store/resumeStore'
 import { getSectionByType } from '@/types'
-
-// jsdom 没有 ResizeObserver，需要 mock
-beforeAll(() => {
-  global.ResizeObserver = class ResizeObserver {
-    observe() {}
-    unobserve() {}
-    disconnect() {}
-  }
-})
 
 // vi.hoisted 确保数据在 vi.mock 提升时可用（不能使用外部 import）
 const { mockResumeData } = vi.hoisted(() => {

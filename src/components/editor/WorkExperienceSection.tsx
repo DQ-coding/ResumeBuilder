@@ -152,8 +152,6 @@ function WorkExperienceSection() {
                       <RichTextEditor
                         value={desc}
                         onChange={(html) => handleChangeDescription(index, descIndex, html)}
-                        placeholder={t('common.descPlaceholder')}
-                        rows={2}
                       />
                       {exp.description.length > 1 && (
                         <button

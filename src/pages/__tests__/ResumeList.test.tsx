@@ -123,11 +123,13 @@ describe('ResumeList 页面', () => {
         title: '我的简历 1',
         templateId: 'classic',
         content: {
-          basic: { name: '', title: '', phone: '', email: '', avatar: '' },
-          summary: '',
-          workExperience: [],
-          education: [],
-          skills: [],
+          sections: [
+            { id: 'section-basic-1', type: 'basic', title: '基本信息', content: { name: '', title: '', phone: '', email: '', avatar: '' } },
+            { id: 'section-summary-1', type: 'summary', title: '个人简介', content: '' },
+            { id: 'section-work-1', type: 'workExperience', title: '工作经历', content: [] },
+            { id: 'section-edu-1', type: 'education', title: '教育背景', content: [] },
+            { id: 'section-skills-1', type: 'skills', title: '技能特长', content: [] },
+          ],
         },
         userId: '1',
         createdAt: '2026-04-12T10:00:00.000Z',
@@ -256,11 +258,13 @@ describe('ResumeList 页面', () => {
         ...mockResumeList[0],
         title: '新标题',
         content: {
-          basic: { name: '', title: '', phone: '', email: '', avatar: '' },
-          summary: '',
-          workExperience: [],
-          education: [],
-          skills: [],
+          sections: [
+            { id: 'section-basic-1', type: 'basic', title: '基本信息', content: { name: '', title: '', phone: '', email: '', avatar: '' } },
+            { id: 'section-summary-1', type: 'summary', title: '个人简介', content: '' },
+            { id: 'section-work-1', type: 'workExperience', title: '工作经历', content: [] },
+            { id: 'section-edu-1', type: 'education', title: '教育背景', content: [] },
+            { id: 'section-skills-1', type: 'skills', title: '技能特长', content: [] },
+          ],
         },
         userId: '1',
       })

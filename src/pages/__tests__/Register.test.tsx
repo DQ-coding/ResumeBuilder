@@ -11,6 +11,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import Register from '@/pages/Register'
 import { useAuthStore } from '@/store/authStore'
 import { supabase } from '@/services/supabase'
+import { AuthError } from '@supabase/supabase-js'
 
 /** 渲染 Register 页面，带路由环境 */
 function renderRegister() {
@@ -84,7 +85,7 @@ describe('Register 页面', () => {
     // Mock Supabase auth 失败
     vi.spyOn(supabase.auth, 'signUp').mockResolvedValueOnce({
       data: { user: null, session: null },
-      error: new Error('邮箱已被注册'),
+      error: new AuthError('邮箱已被注册'),
     })
 
     renderRegister()

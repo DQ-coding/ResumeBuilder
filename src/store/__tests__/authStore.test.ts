@@ -9,6 +9,33 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { useAuthStore } from '@/store/authStore'
 import { supabase } from '@/services/supabase'
+import type { User, Session, AuthTokenResponsePassword } from '@supabase/supabase-js'
+import { AuthError } from '@supabase/supabase-js'
+
+/** 创建最小合规的 Supabase User 对象 */
+function createMockUser(overrides: Partial<User> = {}): User {
+  return {
+    id: '1',
+    email: 'test@test.com',
+    app_metadata: {},
+    user_metadata: {},
+    aud: 'authenticated',
+    created_at: '2026-04-12T00:00:00Z',
+    ...overrides,
+  } as User
+}
+
+/** 创建最小合规的 Supabase Session 对象 */
+function createMockSession(overrides: Partial<Session> = {}): Session {
+  return {
+    access_token: 'token',
+    refresh_token: 'refresh',
+    expires_in: 3600,
+    token_type: 'bearer',
+    user: createMockUser(),
+    ...overrides,
+  } as Session
+}
 
 describe('authStore', () => {
   beforeEach(() => {
@@ -25,7 +52,7 @@ describe('authStore', () => {
     it('Supabase 返回已登录用户时恢复登录态', async () => {
       vi.spyOn(supabase.auth, 'getUser').mockResolvedValueOnce({
         data: {
-          user: { id: '1', email: 'test@test.com' },
+          user: createMockUser(),
         },
         error: null,
       })
@@ -39,7 +66,7 @@ describe('authStore', () => {
 
     it('Supabase 返回无用户时保持未登录', async () => {
       vi.spyOn(supabase.auth, 'getUser').mockResolvedValueOnce({
-        data: { user: null },
+        data: { user: null as unknown as User },
         error: null,
       })
 
@@ -55,11 +82,11 @@ describe('authStore', () => {
     it('登录成功设置用户状态', async () => {
       vi.spyOn(supabase.auth, 'signInWithPassword').mockResolvedValueOnce({
         data: {
-          user: { id: '1', email: 'test@test.com' },
-          session: { access_token: 'token', refresh_token: 'refresh' },
+          user: createMockUser(),
+          session: createMockSession(),
         },
         error: null,
-      })
+      } as AuthTokenResponsePassword)
 
       await useAuthStore.getState().login('test@test.com', 'password123')
 
@@ -72,8 +99,8 @@ describe('authStore', () => {
     it('登录失败不改变状态', async () => {
       vi.spyOn(supabase.auth, 'signInWithPassword').mockResolvedValueOnce({
         data: { user: null, session: null },
-        error: new Error('邮箱或密码错误'),
-      })
+        error: new AuthError('邮箱或密码错误'),
+      } as AuthTokenResponsePassword)
 
       await expect(
         useAuthStore.getState().login('test@test.com', 'wrong'),
@@ -85,12 +112,12 @@ describe('authStore', () => {
     })
 
     it('登录期间 isLoading 为 true', async () => {
-      let resolveLogin: (value: unknown) => void
+      let resolveLogin: (value: AuthTokenResponsePassword) => void
       vi.spyOn(supabase.auth, 'signInWithPassword').mockImplementationOnce(
         () =>
-          new Promise((resolve) => {
+          new Promise<AuthTokenResponsePassword>((resolve) => {
             resolveLogin = resolve
-          }) as ReturnType<typeof supabase.auth.signInWithPassword>,
+          }),
       )
 
       const promise = useAuthStore.getState().login('test@test.com', 'password')
@@ -98,11 +125,11 @@ describe('authStore', () => {
 
       resolveLogin!({
         data: {
-          user: { id: '1', email: 'test@test.com' },
-          session: { access_token: 'token', refresh_token: 'refresh' },
+          user: createMockUser(),
+          session: createMockSession(),
         },
         error: null,
-      })
+      } as AuthTokenResponsePassword)
       await promise
       expect(useAuthStore.getState().isLoading).toBe(false)
     })
@@ -111,7 +138,7 @@ describe('authStore', () => {
   describe('register', () => {
     it('需要邮箱验证时返回 needsEmailConfirmation=true', async () => {
       vi.spyOn(supabase.auth, 'signUp').mockResolvedValueOnce({
-        data: { user: { id: '1', email: 'test@test.com' }, session: null },
+        data: { user: createMockUser(), session: null },
         error: null,
       })
 
@@ -124,8 +151,8 @@ describe('authStore', () => {
     it('无需邮箱验证时直接登录', async () => {
       vi.spyOn(supabase.auth, 'signUp').mockResolvedValueOnce({
         data: {
-          user: { id: '1', email: 'test@test.com' },
-          session: { access_token: 'token', refresh_token: 'refresh' },
+          user: createMockUser(),
+          session: createMockSession(),
         },
         error: null,
       })
