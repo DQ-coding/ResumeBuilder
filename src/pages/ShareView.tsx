@@ -7,11 +7,13 @@
  * @spec share-link
  */
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { getPublicResume } from '@/services/resumeService'
 import { getTemplateConfig } from '@/pdf/templateRegistry'
+import { exportPdf } from '@/utils/exportPdf'
+import { toast } from '@/utils/toast'
 import type { ResumeContent } from '@/types'
 
 function ShareView() {
@@ -22,6 +24,19 @@ function ShareView() {
   const [content, setContent] = useState<ResumeContent | null>(null)
   const [loading, setLoading] = useState(token ? true : false)
   const [error, setError] = useState(token ? '' : t('share.invalidLink'))
+  const [exporting, setExporting] = useState(false)
+
+  const handleExportPdf = useCallback(async () => {
+    if (!content) return
+    setExporting(true)
+    try {
+      await exportPdf(content, templateId, title)
+    } catch {
+      toast.error(t('share.pdfError'))
+    } finally {
+      setExporting(false)
+    }
+  }, [content, templateId, title, t])
 
   useEffect(() => {
     if (!token) {
@@ -86,7 +101,30 @@ function ShareView() {
       <header className="border-b border-gray-200 bg-white px-6 py-3">
         <div className="mx-auto flex max-w-4xl items-center justify-between">
           <h1 className="text-lg font-semibold text-gray-900 truncate">{title}</h1>
-          <span className="text-xs text-gray-400">{t('share.poweredBy')}</span>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={handleExportPdf}
+              disabled={exporting}
+              className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700 transition-colors disabled:bg-blue-300 disabled:cursor-not-allowed"
+            >
+              <svg
+                className="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+              {exporting ? t('share.exporting') : t('share.downloadPdf')}
+            </button>
+            <span className="text-xs text-gray-400">{t('share.poweredBy')}</span>
+          </div>
         </div>
       </header>
 

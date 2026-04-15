@@ -203,6 +203,9 @@
     "invalidLink": "Link invalid or sharing disabled",
     "invalidHint": "This share link does not exist or has been disabled",
     "loading": "Loading...",
-    "poweredBy": "ResumeBuilder"
+    "poweredBy": "ResumeBuilder",
+    "downloadPdf": "Download PDF",
+    "exporting": "Exporting...",
+    "pdfError": "PDF export failed, please try again later"
   }
 }

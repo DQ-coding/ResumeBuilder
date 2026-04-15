@@ -203,6 +203,9 @@
     "invalidLink": "链接无效或已关闭",
     "invalidHint": "该分享链接不存在或已被关闭",
     "loading": "加载中...",
-    "poweredBy": "ResumeBuilder"
+    "poweredBy": "ResumeBuilder",
+    "downloadPdf": "下载 PDF",
+    "exporting": "导出中...",
+    "pdfError": "PDF 导出失败，请稍后重试"
   }
 }
