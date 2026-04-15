@@ -87,7 +87,7 @@ function ShareModal({ open, resumeId, onClose }: ShareModalProps) {
       open={open}
       title={t('editor.share.title')}
       onCancel={onClose}
-      cancelText={t('common.close')}
+      cancelText={t('common.cancel')}
     >
       <div className="space-y-4">
         {/* 开关 */}
