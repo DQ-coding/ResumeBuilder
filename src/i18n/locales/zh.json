@@ -1,0 +1,208 @@
+{
+  "common": {
+    "appName": "ResumeBuilder",
+    "login": "登录",
+    "register": "注册",
+    "logout": "退出",
+    "save": "保存",
+    "cancel": "取消",
+    "confirm": "确定",
+    "delete": "删除",
+    "rename": "重命名",
+    "loading": "加载中...",
+    "startDate": "开始时间",
+    "endDate": "结束时间",
+    "description": "描述",
+    "addDescription": "+ 添加描述",
+    "deleteDescription": "删除此条描述",
+    "descPlaceholder": "描述内容"
+  },
+  "landing": {
+    "heroLine1": "用最简单的方式",
+    "heroLine2": "构建专业简历",
+    "heroSub1": "在线简历构建器，提供模板、所见即所得编辑，一键导出高清 PDF。",
+    "heroSub2": "无需设计经验，开箱即用。",
+    "ctaStart": "开始制作简历",
+    "ctaRegister": "免费注册",
+    "whyChoose": "为什么选择 ResumeBuilder",
+    "feature1Title": "模板即开即用",
+    "feature1Desc": "选择模板直接填内容，无需从零设计排版",
+    "feature2Title": "所见即所得",
+    "feature2Desc": "左侧编辑、右侧实时预览，改一处看一处",
+    "feature3Title": "一键导出 PDF",
+    "feature3Desc": "矢量文字排版，高清输出，打印无模糊",
+    "feature4Title": "云端持久存储",
+    "feature4Desc": "数据存后端，换设备不丢失，多简历管理",
+    "bottomCtaTitle": "准备好开始了吗？",
+    "bottomCtaDesc": "免费注册，立即制作你的专业简历"
+  },
+  "auth": {
+    "loginTitle": "登录 ResumeBuilder",
+    "registerTitle": "注册 ResumeBuilder",
+    "email": "邮箱",
+    "emailPlaceholder": "请输入邮箱",
+    "emailInvalid": "邮箱格式不正确",
+    "password": "密码",
+    "passwordPlaceholder": "输入密码",
+    "passwordMinLength": "密码至少 8 位",
+    "confirmPassword": "确认密码",
+    "confirmPasswordPlaceholder": "再次输入密码",
+    "passwordMismatch": "两次密码不一致",
+    "passwordRequired": "请输入密码",
+    "emailRequired": "请输入邮箱",
+    "confirmPasswordRequired": "请确认密码",
+    "loginFailed": "登录失败，请稍后重试",
+    "registerFailed": "注册失败，请稍后重试",
+    "noAccount": "还没有账号？",
+    "hasAccount": "已有账号？"
+  },
+  "resumeList": {
+    "title": "我的简历",
+    "createNew": "新建简历",
+    "importJson": "导入 JSON",
+    "importing": "导入中...",
+    "emptyTitle": "还没有简历",
+    "emptyCta": "创建第一份简历",
+    "lastEdited": "最后编辑：",
+    "createSuccess": "简历创建成功",
+    "createFailed": "创建简历失败",
+    "deleteSuccess": "简历已删除",
+    "deleteFailed": "删除失败",
+    "renameSuccess": "重命名成功",
+    "renameFailed": "重命名失败",
+    "importSuccess": "简历导入成功",
+    "importFailed": "导入失败",
+    "loadFailed": "加载简历列表失败",
+    "deleteConfirmTitle": "删除简历",
+    "deleteConfirmMsg": "确定要删除「{{title}}」吗？此操作不可撤销。",
+    "renameTitle": "重命名简历",
+    "renamePlaceholder": "输入新名称"
+  },
+  "editor": {
+    "title": "简历编辑器",
+    "backToList": "返回列表",
+    "saveStatusSaved": "已保存",
+    "saveStatusSaving": "保存中...",
+    "saveStatusUnsaved": "未保存",
+    "downloadPdf": "下载 PDF",
+    "exporting": "导出中...",
+    "exportJson": "导出 JSON",
+    "addSection": "+ 添加模块",
+    "addSectionTitle": "添加模块",
+    "hideSection": "隐藏该模块（预览和PDF中不显示）",
+    "showSection": "显示该模块",
+    "sections": {
+      "basic": "基本信息",
+      "summary": "个人简介",
+      "workExperience": "工作经历",
+      "education": "教育背景",
+      "skills": "技能特长",
+      "custom": "自定义模块"
+    },
+    "basicInfo": {
+      "name": "姓名",
+      "namePlaceholder": "请输入姓名",
+      "title": "职位",
+      "titlePlaceholder": "请输入职位",
+      "phone": "电话",
+      "phonePlaceholder": "请输入电话号码",
+      "email": "邮箱",
+      "emailPlaceholder": "请输入邮箱地址",
+      "age": "年龄",
+      "agePlaceholder": "如：25",
+      "gender": "性别",
+      "genderPlaceholder": "如：男/女",
+      "targetCity": "意向城市",
+      "targetCityPlaceholder": "如：上海",
+      "avatarUpload": "上传头像",
+      "avatarUploading": "上传中...",
+      "avatarRemove": "删除",
+      "avatarHint": "支持 JPG/PNG/WebP，建议使用一寸照",
+      "avatarTypeError": "仅支持 JPG、PNG、WebP 格式",
+      "avatarSizeError": "图片大小不能超过 2MB",
+      "avatarUploadError": "头像上传失败，请稍后重试",
+      "avatarCropTitle": "裁剪头像",
+      "avatarZoom": "缩放"
+    },
+    "summary": {
+      "label": "自我介绍",
+      "placeholder": "请输入个人简介"
+    },
+    "workExperience": {
+      "company": "公司名",
+      "companyPlaceholder": "公司名称",
+      "position": "职位",
+      "positionPlaceholder": "职位名称",
+      "description": "工作描述",
+      "addWork": "+ 添加工作经历",
+      "deleteWork": "删除此条工作经历"
+    },
+    "education": {
+      "school": "学校名",
+      "schoolPlaceholder": "学校名称",
+      "major": "专业",
+      "majorPlaceholder": "所学专业",
+      "degree": "学历",
+      "degreePlaceholder": "如：本科、硕士",
+      "addEducation": "+ 添加教育背景",
+      "deleteEducation": "删除此条教育背景"
+    },
+    "skills": {
+      "namePlaceholder": "技能名称",
+      "deleteSkill": "删除此技能",
+      "addSkill": "+ 添加技能",
+      "beginner": "了解",
+      "proficient": "熟练",
+      "expert": "精通"
+    },
+    "customSection": {
+      "titlePlaceholder": "模块标题",
+      "deleteSection": "删除模块",
+      "itemTitle": "标题",
+      "itemTitlePlaceholder": "项目名称",
+      "subtitle": "副标题",
+      "subtitlePlaceholder": "角色 / 描述",
+      "deleteItem": "删除此条记录",
+      "addItem": "+ 添加记录"
+    },
+    "presetTypes": {
+      "project": "项目经历",
+      "certificate": "证书荣誉",
+      "hobby": "兴趣爱好",
+      "custom": "自定义模块"
+    },
+    "share": {
+      "title": "分享",
+      "enableShare": "开启公开分享",
+      "shareLink": "分享链接",
+      "copy": "复制",
+      "copied": "已复制",
+      "disabledHint": "开启后，任何人可通过链接查看你的简历",
+      "enabledHint": "链接已生效，任何人均可查看此简历"
+    }
+  },
+  "preview": {
+    "contact": "联系方式",
+    "skills": "技能",
+    "skillLevels": {
+      "beginner": "了解",
+      "proficient": "熟练",
+      "expert": "精通"
+    }
+  },
+  "autoSave": {
+    "unsavedWarning": "你有未保存的更改，确定要离开吗？"
+  },
+  "toast": {
+    "saveSuccess": "保存成功",
+    "saveFailed": "保存失败",
+    "shareStatusError": "获取分享状态失败",
+    "shareToggleError": "切换分享状态失败"
+  },
+  "share": {
+    "invalidLink": "链接无效或已关闭",
+    "invalidHint": "该分享链接不存在或已被关闭",
+    "loading": "加载中...",
+    "poweredBy": "ResumeBuilder"
+  }
+}

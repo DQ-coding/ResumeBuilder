@@ -1,0 +1,208 @@
+{
+  "common": {
+    "appName": "ResumeBuilder",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "rename": "Rename",
+    "loading": "Loading...",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "description": "Description",
+    "addDescription": "+ Add Description",
+    "deleteDescription": "Delete this description",
+    "descPlaceholder": "Description"
+  },
+  "landing": {
+    "heroLine1": "Build your resume",
+    "heroLine2": "the easy way",
+    "heroSub1": "Online resume builder with templates, WYSIWYG editing, and one-click HD PDF export.",
+    "heroSub2": "No design skills needed. Ready to use out of the box.",
+    "ctaStart": "Start Building",
+    "ctaRegister": "Sign Up Free",
+    "whyChoose": "Why ResumeBuilder?",
+    "feature1Title": "Ready-to-use Templates",
+    "feature1Desc": "Pick a template and fill in your content — no design from scratch",
+    "feature2Title": "WYSIWYG Editing",
+    "feature2Desc": "Edit on the left, preview on the right — see changes instantly",
+    "feature3Title": "One-Click PDF Export",
+    "feature3Desc": "Vector text rendering, HD output, print without blur",
+    "feature4Title": "Cloud Storage",
+    "feature4Desc": "Data stored in the cloud — access anywhere, manage multiple resumes",
+    "bottomCtaTitle": "Ready to get started?",
+    "bottomCtaDesc": "Sign up for free and create your professional resume now"
+  },
+  "auth": {
+    "loginTitle": "Login to ResumeBuilder",
+    "registerTitle": "Register for ResumeBuilder",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "emailInvalid": "Invalid email format",
+    "password": "Password",
+    "passwordPlaceholder": "Enter password",
+    "passwordMinLength": "Password must be at least 8 characters",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Re-enter password",
+    "passwordMismatch": "Passwords do not match",
+    "passwordRequired": "Please enter your password",
+    "emailRequired": "Please enter your email",
+    "confirmPasswordRequired": "Please confirm your password",
+    "loginFailed": "Login failed, please try again later",
+    "registerFailed": "Registration failed, please try again later",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?"
+  },
+  "resumeList": {
+    "title": "My Resumes",
+    "createNew": "New Resume",
+    "importJson": "Import JSON",
+    "importing": "Importing...",
+    "emptyTitle": "No resumes yet",
+    "emptyCta": "Create your first resume",
+    "lastEdited": "Last edited: ",
+    "createSuccess": "Resume created",
+    "createFailed": "Failed to create resume",
+    "deleteSuccess": "Resume deleted",
+    "deleteFailed": "Failed to delete",
+    "renameSuccess": "Renamed successfully",
+    "renameFailed": "Failed to rename",
+    "importSuccess": "Resume imported",
+    "importFailed": "Import failed",
+    "loadFailed": "Failed to load resume list",
+    "deleteConfirmTitle": "Delete Resume",
+    "deleteConfirmMsg": "Are you sure you want to delete \"{{title}}\"? This action cannot be undone.",
+    "renameTitle": "Rename Resume",
+    "renamePlaceholder": "Enter new name"
+  },
+  "editor": {
+    "title": "Resume Editor",
+    "backToList": "Back to List",
+    "saveStatusSaved": "Saved",
+    "saveStatusSaving": "Saving...",
+    "saveStatusUnsaved": "Unsaved",
+    "downloadPdf": "Download PDF",
+    "exporting": "Exporting...",
+    "exportJson": "Export JSON",
+    "addSection": "+ Add Section",
+    "addSectionTitle": "Add Section",
+    "hideSection": "Hide this section (won't appear in preview and PDF)",
+    "showSection": "Show this section",
+    "sections": {
+      "basic": "Basic Info",
+      "summary": "Summary",
+      "workExperience": "Work Experience",
+      "education": "Education",
+      "skills": "Skills",
+      "custom": "Custom Section"
+    },
+    "basicInfo": {
+      "name": "Name",
+      "namePlaceholder": "Enter your name",
+      "title": "Title",
+      "titlePlaceholder": "Enter your title",
+      "phone": "Phone",
+      "phonePlaceholder": "Enter phone number",
+      "email": "Email",
+      "emailPlaceholder": "Enter email address",
+      "age": "Age",
+      "agePlaceholder": "e.g. 25",
+      "gender": "Gender",
+      "genderPlaceholder": "e.g. Male/Female",
+      "targetCity": "Target City",
+      "targetCityPlaceholder": "e.g. Shanghai",
+      "avatarUpload": "Upload Avatar",
+      "avatarUploading": "Uploading...",
+      "avatarRemove": "Remove",
+      "avatarHint": "JPG/PNG/WebP, 3:4 recommended",
+      "avatarTypeError": "Only JPG, PNG, and WebP formats are supported",
+      "avatarSizeError": "Image size must not exceed 2MB",
+      "avatarUploadError": "Avatar upload failed, please try again later",
+      "avatarCropTitle": "Crop Avatar",
+      "avatarZoom": "Zoom"
+    },
+    "summary": {
+      "label": "About Me",
+      "placeholder": "Enter your summary"
+    },
+    "workExperience": {
+      "company": "Company",
+      "companyPlaceholder": "Company name",
+      "position": "Position",
+      "positionPlaceholder": "Position title",
+      "description": "Work Description",
+      "addWork": "+ Add Work Experience",
+      "deleteWork": "Delete this work experience"
+    },
+    "education": {
+      "school": "School",
+      "schoolPlaceholder": "School name",
+      "major": "Major",
+      "majorPlaceholder": "Field of study",
+      "degree": "Degree",
+      "degreePlaceholder": "e.g. Bachelor, Master",
+      "addEducation": "+ Add Education",
+      "deleteEducation": "Delete this education"
+    },
+    "skills": {
+      "namePlaceholder": "Skill name",
+      "deleteSkill": "Delete this skill",
+      "addSkill": "+ Add Skill",
+      "beginner": "Beginner",
+      "proficient": "Proficient",
+      "expert": "Expert"
+    },
+    "customSection": {
+      "titlePlaceholder": "Section title",
+      "deleteSection": "Delete Section",
+      "itemTitle": "Title",
+      "itemTitlePlaceholder": "Project name",
+      "subtitle": "Subtitle",
+      "subtitlePlaceholder": "Role / Description",
+      "deleteItem": "Delete this item",
+      "addItem": "+ Add Item"
+    },
+    "presetTypes": {
+      "project": "Projects",
+      "certificate": "Certificates & Awards",
+      "hobby": "Hobbies",
+      "custom": "Custom Section"
+    },
+    "share": {
+      "title": "Share",
+      "enableShare": "Enable public sharing",
+      "shareLink": "Share Link",
+      "copy": "Copy",
+      "copied": "Copied",
+      "disabledHint": "When enabled, anyone with the link can view your resume",
+      "enabledHint": "Link is active — anyone can view this resume"
+    }
+  },
+  "preview": {
+    "contact": "Contact",
+    "skills": "Skills",
+    "skillLevels": {
+      "beginner": "Beginner",
+      "proficient": "Proficient",
+      "expert": "Expert"
+    }
+  },
+  "autoSave": {
+    "unsavedWarning": "You have unsaved changes. Are you sure you want to leave?"
+  },
+  "toast": {
+    "saveSuccess": "Saved successfully",
+    "saveFailed": "Save failed",
+    "shareStatusError": "Failed to get share status",
+    "shareToggleError": "Failed to toggle sharing"
+  },
+  "share": {
+    "invalidLink": "Link invalid or sharing disabled",
+    "invalidHint": "This share link does not exist or has been disabled",
+    "loading": "Loading...",
+    "poweredBy": "ResumeBuilder"
+  }
+}
