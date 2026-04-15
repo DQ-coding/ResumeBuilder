@@ -22,6 +22,8 @@ import type { ResumeContent } from '@/types'
 
 /** A4 宽度 @96dpi：210mm ≈ 794px */
 const A4_WIDTH_PX = 794
+/** A4 高度 @96dpi：297mm ≈ 1123px */
+const A4_HEIGHT_PX = 1123
 /** A4 宽度 mm */
 const A4_WIDTH_MM = 210
 /** A4 高度 mm */
@@ -72,6 +74,7 @@ export async function exportPdf(
     left: 0;
     top: 0;
     width: ${A4_WIDTH_PX}px;
+    min-height: ${A4_HEIGHT_PX}px;
     background: white;
     z-index: -1;
     pointer-events: none;
@@ -117,7 +120,12 @@ export async function exportPdf(
     })
 
     const imgWidth = A4_WIDTH_MM
-    const imgHeight = (canvas.height * imgWidth) / canvas.width
+    // 按实际内容计算高度
+    const contentHeight = (canvas.height * imgWidth) / canvas.width
+    // 向上取整到 A4 页面的整数倍，消除浮点误差导致的空白尾页
+    // 减去微小 epsilon 避免 297.001mm 这种浮点噪声被取整为两页
+    const pageCount = Math.ceil(contentHeight / A4_HEIGHT_MM - 0.01)
+    const imgHeight = Math.max(pageCount * A4_HEIGHT_MM, A4_HEIGHT_MM)
     const pageHeight = A4_HEIGHT_MM
 
     // 将整张图片按 A4 页面高度分页添加

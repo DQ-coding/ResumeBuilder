@@ -134,6 +134,64 @@ describe('exportPdf', () => {
     expect(mockSave).toHaveBeenCalledWith('自定义文件名_简历.pdf')
   })
 
+  it('离屏容器设置 minHeight 确保至少一页 A4 高度', async () => {
+    const content = createEmptyResumeContent()
+    await exportPdf(content)
+
+    // 验证 html2canvas 接收到的容器包含 minHeight 样式
+    const container = (html2canvas as ReturnType<typeof vi.fn>).mock.calls[0][0] as HTMLElement
+    expect(container.style.minHeight).toBe('1123px')
+  })
+
+  it('内容不足一页时 imgHeight 至少为 A4 高度且不产生空白第二页', async () => {
+    // 模拟内容不足一页：canvas 高度只有 800px（远小于 A4 的 1123px * 2 = 2246px）
+    vi.mocked(html2canvas).mockResolvedValueOnce({
+      toDataURL: vi.fn().mockReturnValue('data:image/jpeg;base64,short'),
+      width: 1588,
+      height: 1600, // 800px * 2 (scale=2)，不足一页
+    } as unknown as HTMLCanvasElement)
+
+    const content = createEmptyResumeContent()
+    await exportPdf(content)
+
+    // addImage(imageData, format, x, y, width, height) — height 是第6个参数
+    const addImageCall = mockAddImage.mock.calls[0]
+    const imgHeight = addImageCall[5] as number
+    expect(imgHeight).toBeGreaterThanOrEqual(297)
+    // 不应产生空白第二页
+    expect(mockAddPage).not.toHaveBeenCalled()
+  })
+
+  it('内容刚满一页时（含浮点误差）不产生空白第二页', async () => {
+    // 模拟内容刚好一页但存在微小浮点溢出：canvas 高度 2248px（略超 1123px * 2 = 2246px）
+    vi.mocked(html2canvas).mockResolvedValueOnce({
+      toDataURL: vi.fn().mockReturnValue('data:image/jpeg;base64,onepage'),
+      width: 1588,
+      height: 2248, // 略超一页的精确像素高度
+    } as unknown as HTMLCanvasElement)
+
+    const content = createEmptyResumeContent()
+    await exportPdf(content)
+
+    // 内容刚满一页，不应产生空白第二页
+    expect(mockAddPage).not.toHaveBeenCalled()
+  })
+
+  it('内容超过一页时正确分页', async () => {
+    // 模拟内容超过一页：canvas 高度 3000px
+    vi.mocked(html2canvas).mockResolvedValueOnce({
+      toDataURL: vi.fn().mockReturnValue('data:image/jpeg;base64,twopage'),
+      width: 1588,
+      height: 3000,
+    } as unknown as HTMLCanvasElement)
+
+    const content = createEmptyResumeContent()
+    await exportPdf(content)
+
+    // 内容超过一页，应产生第二页
+    expect(mockAddPage).toHaveBeenCalled()
+  })
+
   it('无姓名时使用默认文件名', async () => {
     const content = createEmptyResumeContent()
 
